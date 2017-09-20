@@ -2,6 +2,7 @@
 #include "stdlib.h"
 #include "conio.h"
 #include "string.h"
+#include "math.h"
 #include <sys/types.h>
 #include <dirent.h>
 FILE *fp;
@@ -15,8 +16,8 @@ Then we try to read those files and store them into a file array.
 These can be accessed later to get strings from files.*/
 static void scan_dir(const char *dir){
     struct dirent * entry;
-    DIR *d = opendir( dir );
     int c=0,ff=0;
+    DIR *d = opendir( dir );
     if (d == 0) 
     {
        perror("opendir");
@@ -36,32 +37,25 @@ static void scan_dir(const char *dir){
     }
     closedir(d);
 }
-// /*A function to use a power b*/
-// int indpow(int a,int b){
-//  int res=1;
-//  for(int temp=1;temp<=b;temp++){
-//      res*=a;
-//  }
-//  return res;
-// }
-// /*A function to extract text from .txt files*/
-// static void fileextract(char const *argv[]){
-//     scan_dir(argv[]);
-//     Loop to acquire all text files to strings
-//     for(int k=0;k<fcount;k++){
-//         fp=fopen(file[k],"r");
-//         while(!feof(fp)){
-//             fgets(txt,100,fp);
-//             strcpy(g[k],txt);
-//             strcat(g[k]," ");
-//             // printf("%s\n",g[k] );
-//         }
-//         fclose(fp);
-//     }
-// }
-int main(int argc, char const *argv[])
-{
-    /* code */
+/*A function to use a power b*/
+int indpow(int a,int b){
+	int res=1;
+	for(int temp=1;temp<=b;temp++){
+		res*=a;
+	}
+	return res;
+}
+/*A function to extract text from .txt files*/
+static void fileextract(){
     scan_dir("txt\\");
-    return 0;
+    /*Loop to acquire all text files to strings*/
+    for(int k=0;k<fcount;k++){
+        fp=fopen(file[k],"r");
+        while(!feof(fp)){
+            fgets(txt,100,fp);
+            strcpy(g[k],txt);
+            strcat(g[k]," ");
+        }
+        fclose(fp);
+    }
 }
